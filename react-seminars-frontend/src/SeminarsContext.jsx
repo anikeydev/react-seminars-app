@@ -4,12 +4,14 @@ import { getSeminarsB, deleteSeminarB, updateSeminarB } from './base'
 const SeminarsContext = createContext({
   seminars: [],
   loading: false,
-  updateSeminar: false,
+  updateModal: null,
+  createModal: false,
 })
 
 export function SeminarsContextProvider({ children }) {
   const [loading, setLoading] = useState(false)
   const [updateModal, setUpdateModal] = useState(null)
+  const [createModal, setCreateModal] = useState(true)
   const [seminars, setSeminars] = useState([])
 
   async function deleteSeminar(id) {
@@ -47,6 +49,7 @@ export function SeminarsContextProvider({ children }) {
         updateSeminar,
         setUpdateModal,
         updateModal,
+        createModal,
       }}>
       {children}
     </SeminarsContext.Provider>
