@@ -39,7 +39,11 @@ export default function CardSeminarApp(props) {
 
   return (
     <div className="card p-2" style={{ width: '30%' }}>
-      {/* <img src={props.data.photo} style={cardImgStyle} /> */}
+      <img
+        src={props.data.photo}
+        className="card-img-top"
+        alt={props.data.title}
+      />
       <div className="card-body d-flex flex-column justify-content-between">
         <h3 className="card-title">{props.data.title}</h3>
         <p className="card-text">{props.data.description}</p>
