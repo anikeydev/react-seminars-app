@@ -1,11 +1,15 @@
 export default function ModalDeleteApp(props) {
   return (
-    <>
-      <h2 style={{ textAlign: 'center' }}>Уверены что хотите удалить?</h2>
-      <div>
-        <button onClick={props.delete}>Удалить</button>
-        <button onClick={props.open}>Закрыть</button>
+    <div className="card-body d-flex flex-column justify-content-between">
+      <h4 className="mb-3">Уверены что хотите удалить?</h4>
+      <div className="d-flex gap-2 justify-content-center">
+        <button className="btn btn-danger btn-sm" onClick={props.delete}>
+          Удалить
+        </button>
+        <button className="btn btn-primary btn-sm" onClick={props.open}>
+          Закрыть
+        </button>
       </div>
-    </>
+    </div>
   )
 }

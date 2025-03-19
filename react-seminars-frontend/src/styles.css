@@ -1,22 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
-
-* {
-    box-sizing: border-box;
-}
-
-ul {
-    list-style: none;
-}
-
 body {
-    font-family: "Roboto", sans-serif;
     font-size: 16px;
     font-weight: 400;
     background-color: #003f5c;
-}
-
-.container {
-    width: 1200px;
-    padding: 0 1rem;
-    margin: 0 auto;
+    padding: 1rem;
 }

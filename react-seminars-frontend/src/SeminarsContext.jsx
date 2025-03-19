@@ -21,25 +21,27 @@ export function SeminarsContextProvider({ children }) {
   const [seminars, setSeminars] = useState([])
 
   async function deleteSeminar(id) {
-    const res = await deleteSeminarB(id)
+    const { message } = await deleteSeminarB(id)
     setSeminars(seminars.filter((s) => s.id != id))
-    console.log(res)
+    console.log(message)
   }
 
   async function updateSeminar(id, data) {
-    const res = await updateSeminarB(id, data)
+    const { message, updateSeminar } = await updateSeminarB(id, data)
     const result = seminars
     const idx = result.findIndex((r) => r.id == id)
     result[idx] = {
-      ...data,
+      ...updateSeminar,
       id,
     }
     setSeminars(result)
+    console.log(message)
   }
 
   async function createSeminar(id = '', data) {
-    const newSeminar = await createSeminarB(data)
+    const { message, newSeminar } = await createSeminarB(data)
     setSeminars([...seminars, newSeminar])
+    console.log(message)
   }
 
   useEffect(() => {

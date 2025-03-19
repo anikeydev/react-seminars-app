@@ -26,7 +26,7 @@ export async function getSeminarsB() {
   return await axios
     .get('http://localhost:8000/api/v1/seminars/')
     .then((response) => {
-      return response.data // Сохраняем данные в состояние
+      return response.data
     })
     .catch(() => {
       console.log('Не удалось загрузить семинары')
@@ -37,7 +37,6 @@ export async function deleteSeminarB(id) {
   return await axios
     .delete(`http://localhost:8000/api/v1/seminars/${id}`)
     .then((response) => {
-      console.log(`${response.data.message} with ID ${id}`)
       return response.data
     })
     .catch((e) => {
@@ -51,8 +50,7 @@ export async function createSeminarB(data) {
       ...data,
     })
     .then((response) => {
-      console.log(`Created new seminar with ID ${response.data.newSeminar.id}`)
-      return response.data.newSeminar
+      return response.data
     })
     .catch((e) => {
       console.log(`Filed created new seminar - ${e.message}`)
@@ -65,7 +63,6 @@ export async function updateSeminarB(id, data) {
       ...data,
     })
     .then((response) => {
-      console.log(`Update with ID ${id}`)
       return response.data
     })
     .catch((e) => {

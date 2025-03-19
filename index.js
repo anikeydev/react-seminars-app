@@ -50,13 +50,18 @@ app.get('/api/v1/seminars', (req, res) => {
 
 app.delete('/api/v1/seminars/:id', (req, res) => {
   seminars = seminars.filter((s) => s.id != req.params.id)
-  res.status(200).json({ message: `Seminar for id:${req.params.id} deleted` })
+  res.status(200).json({ message: `Seminar deleted with ID: ${req.params.id}` })
 })
 
 app.put('/api/v1/seminars/:id', (req, res) => {
   const idx = seminars.findIndex((s) => s.id == req.params.id)
   const updateSeminar = (seminars[idx] = req.body)
-  res.status(200).json({ updateSeminar })
+  res
+    .status(200)
+    .json({
+      updateSeminar,
+      message: `Updated seminar with ID: ${req.params.id}`,
+    })
 })
 
 app.post('/api/v1/seminars/', (req, res) => {
@@ -65,7 +70,10 @@ app.post('/api/v1/seminars/', (req, res) => {
     id: v4(),
   }
   seminars.push(newSeminar)
-  res.status(200).json({ newSeminar })
+  res.status(200).json({
+    newSeminar,
+    message: `Created new seminar with ID ${newSeminar.id}`,
+  })
 })
 
 app.listen(PORT, () => {
