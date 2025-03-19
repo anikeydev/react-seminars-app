@@ -55,8 +55,8 @@ app.delete('/api/v1/seminars/:id', (req, res) => {
 
 app.put('/api/v1/seminars/:id', (req, res) => {
   const idx = seminars.findIndex((s) => s.id == req.params.id)
-  seminars[idx] = req.body
-  res.status(200).json({ updateSeminar: req.body })
+  const updateSeminar = (seminars[idx] = req.body)
+  res.status(200).json({ updateSeminar })
 })
 
 app.post('/api/v1/seminars/', (req, res) => {
@@ -65,7 +65,7 @@ app.post('/api/v1/seminars/', (req, res) => {
     id: v4(),
   }
   seminars.push(newSeminar)
-  res.status(200).json({ newSeminar: req.body })
+  res.status(200).json({ newSeminar })
 })
 
 app.listen(PORT, () => {

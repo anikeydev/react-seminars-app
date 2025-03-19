@@ -51,7 +51,7 @@ export async function createSeminarB(data) {
       ...data,
     })
     .then((response) => {
-      console.log(`Created new seminar`)
+      console.log(`Created new seminar with ID ${response.data.newSeminar.id}`)
       return response.data.newSeminar
     })
     .catch((e) => {

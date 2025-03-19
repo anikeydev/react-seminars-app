@@ -13,7 +13,7 @@ const listStyle = {
 }
 
 export default function SimanarsApp() {
-  const { seminars, updateModal, createModal } = useSeminars()
+  const { seminars, updateModal, createModal, setCreateModal } = useSeminars()
 
   if (updateModal) {
     return <ModalUpdateApp />
@@ -24,10 +24,19 @@ export default function SimanarsApp() {
   }
 
   return (
-    <ul style={listStyle}>
-      {seminars.map((s) => (
-        <CardSeminarApp key={s.id} data={s} />
-      ))}
-    </ul>
+    <div>
+      <button
+        onClick={() => {
+          setCreateModal(true)
+        }}>
+        Создать
+      </button>
+      <br />
+      <ul style={listStyle}>
+        {seminars.map((s) => (
+          <CardSeminarApp key={s.id} data={s} />
+        ))}
+      </ul>
+    </div>
   )
 }

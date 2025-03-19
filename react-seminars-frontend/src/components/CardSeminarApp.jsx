@@ -27,7 +27,7 @@ const cardImgStyle = {
   borderRadius: '10px',
 }
 export default function CardSeminarApp(props) {
-  const { deleteSeminar, setUpdateModal } = useSeminars()
+  const { deleteSeminar, setUpdateModal, setUpSeminar } = useSeminars()
   const [isOpenModalDelete, setIsOpenModalDelete] = useState(false)
 
   function handleDelete() {
@@ -39,7 +39,8 @@ export default function CardSeminarApp(props) {
   }
 
   function handleUpdateModal() {
-    setUpdateModal(props.data)
+    setUpSeminar(props.data)
+    setUpdateModal(true)
   }
 
   if (isOpenModalDelete) {

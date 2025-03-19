@@ -1,3 +1,4 @@
+import { useSeminars } from '../SeminarsContext'
 import FormApp from './FormApp'
 
 const styles = {
@@ -11,9 +12,19 @@ const styles = {
 }
 
 export default function ModalCreateApp() {
+  const { setCreateModal, createSeminar } = useSeminars()
+
   return (
     <div style={styles.containerForm}>
-      <FormApp />
+      <FormApp
+        config={{
+          title: 'Создать семинар',
+          actionBtnName: 'Создать',
+          actionClose: setCreateModal,
+          actionForm: createSeminar,
+          upSeminar: {},
+        }}
+      />
     </div>
   )
 }

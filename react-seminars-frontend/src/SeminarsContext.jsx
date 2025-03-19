@@ -1,5 +1,10 @@
 import { createContext, useState, useContext, useEffect } from 'react'
-import { getSeminarsB, deleteSeminarB, updateSeminarB } from './base'
+import {
+  getSeminarsB,
+  deleteSeminarB,
+  updateSeminarB,
+  createSeminarB,
+} from './base'
 
 const SeminarsContext = createContext({
   seminars: [],
@@ -10,8 +15,9 @@ const SeminarsContext = createContext({
 
 export function SeminarsContextProvider({ children }) {
   const [loading, setLoading] = useState(false)
-  const [updateModal, setUpdateModal] = useState(null)
-  const [createModal, setCreateModal] = useState(true)
+  const [upSeminar, setUpSeminar] = useState(null)
+  const [updateModal, setUpdateModal] = useState(false)
+  const [createModal, setCreateModal] = useState(false)
   const [seminars, setSeminars] = useState([])
 
   async function deleteSeminar(id) {
@@ -24,9 +30,16 @@ export function SeminarsContextProvider({ children }) {
     const res = await updateSeminarB(id, data)
     const result = seminars
     const idx = result.findIndex((r) => r.id == id)
-    result[idx] = data
+    result[idx] = {
+      ...data,
+      id,
+    }
     setSeminars(result)
-    console.log(res)
+  }
+
+  async function createSeminar(id = '', data) {
+    const newSeminar = await createSeminarB(data)
+    setSeminars([...seminars, newSeminar])
   }
 
   useEffect(() => {
@@ -46,10 +59,14 @@ export function SeminarsContextProvider({ children }) {
         loading,
         seminars,
         deleteSeminar,
+        upSeminar,
+        setUpSeminar,
         updateSeminar,
+        createSeminar,
         setUpdateModal,
         updateModal,
         createModal,
+        setCreateModal,
       }}>
       {children}
     </SeminarsContext.Provider>
