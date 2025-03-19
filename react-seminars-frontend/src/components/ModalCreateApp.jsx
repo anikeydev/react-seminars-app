@@ -1,7 +1,9 @@
 import { useSeminars } from '../SeminarsContext'
 import FormApp from './FormApp'
 
+//Компонент - Окно создания семинара
 export default function ModalCreateApp() {
+  //Используем глобальный стейт для удаления
   const { setCreateModal, createSeminar } = useSeminars()
 
   return (

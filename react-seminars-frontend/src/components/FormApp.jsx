@@ -1,9 +1,12 @@
 import { useForm } from 'react-hook-form'
 import { formatDate, validateTrim } from '../utils'
 
+//Компоненты формы
 export default function FormApp(props) {
+  //Конфигурация формы для ее переиспользования
   const { id, title, photo, description, date, time } = props.config.upSeminar
 
+  //react-hook-form
   const {
     register,
     handleSubmit,
@@ -13,6 +16,7 @@ export default function FormApp(props) {
     mode: 'onChange',
   })
 
+  //Обработчик события Submit
   async function onSubmit(data) {
     props.config.actionForm(id, data)
     props.config.actionBtnName === 'Создать' && reset()

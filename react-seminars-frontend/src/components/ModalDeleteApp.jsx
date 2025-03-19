@@ -1,3 +1,4 @@
+//Компонент - Окно удаления семинара
 export default function ModalDeleteApp(props) {
   return (
     <div className="card-body d-flex flex-column justify-content-between">

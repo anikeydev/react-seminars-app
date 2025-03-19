@@ -5,6 +5,7 @@ import { v4 } from 'uuid'
 const PORT = 8000
 const app = express()
 
+//Текущая БД
 let seminars = [
   {
     id: 1,
@@ -41,29 +42,36 @@ let seminars = [
     photo: 'https://picsum.photos/id/4/750/730',
   },
 ]
+//Используем окружение
 app.use(express.json())
 app.use(cors())
+//Статически используем фронт для удобства
+app.use(express.static('./react-seminars-frontend/dist'))
 
+// API
+
+//GET SEMINARS
 app.get('/api/v1/seminars', (req, res) => {
   res.status(200).json(seminars)
 })
 
+//DELETE SEMINAR
 app.delete('/api/v1/seminars/:id', (req, res) => {
   seminars = seminars.filter((s) => s.id != req.params.id)
   res.status(200).json({ message: `Seminar deleted with ID: ${req.params.id}` })
 })
 
+//PUT SEMINAR
 app.put('/api/v1/seminars/:id', (req, res) => {
   const idx = seminars.findIndex((s) => s.id == req.params.id)
   const updateSeminar = (seminars[idx] = req.body)
-  res
-    .status(200)
-    .json({
-      updateSeminar,
-      message: `Updated seminar with ID: ${req.params.id}`,
-    })
+  res.status(200).json({
+    updateSeminar,
+    message: `Updated seminar with ID: ${req.params.id}`,
+  })
 })
 
+//POST SEMINAR
 app.post('/api/v1/seminars/', (req, res) => {
   const newSeminar = {
     ...req.body,
@@ -76,6 +84,7 @@ app.post('/api/v1/seminars/', (req, res) => {
   })
 })
 
+//Запускаем сервер на порте
 app.listen(PORT, () => {
   console.log(`Server has been started on port ${PORT}`)
 })

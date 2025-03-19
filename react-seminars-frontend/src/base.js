@@ -1,30 +1,10 @@
+//Axios для запросов
 import axios from 'axios'
 
-export async function request(url, method = 'GET', data = null) {
-  try {
-    const headers = {}
-    let body
-
-    if (data) {
-      headers['Content-Type'] = 'application/json'
-      body = JSON.stringify(data)
-    }
-
-    const response = await fetch(url, {
-      method,
-      headers,
-      body,
-    })
-
-    return await response.json()
-  } catch (e) {
-    console.warn(`Error: ${e.message}`)
-  }
-}
-
+//Запрос на получение всех семинаров
 export async function getSeminarsB() {
   return await axios
-    .get('http://localhost:8000/api/v1/seminars/')
+    .get('/api/v1/seminars/')
     .then((response) => {
       return response.data
     })
@@ -33,9 +13,10 @@ export async function getSeminarsB() {
     })
 }
 
+//Запрос на удаление по ID
 export async function deleteSeminarB(id) {
   return await axios
-    .delete(`http://localhost:8000/api/v1/seminars/${id}`)
+    .delete(`/api/v1/seminars/${id}`)
     .then((response) => {
       return response.data
     })
@@ -44,9 +25,10 @@ export async function deleteSeminarB(id) {
     })
 }
 
+//Запрос на создание
 export async function createSeminarB(data) {
   return await axios
-    .post('http://localhost:8000/api/v1/seminars/', {
+    .post('/api/v1/seminars/', {
       ...data,
     })
     .then((response) => {
@@ -57,9 +39,10 @@ export async function createSeminarB(data) {
     })
 }
 
+//Запрос на обновление по ID
 export async function updateSeminarB(id, data) {
   return await axios
-    .put(`http://localhost:8000/api/v1/seminars/${id}`, {
+    .put(`/api/v1/seminars/${id}`, {
       ...data,
     })
     .then((response) => {

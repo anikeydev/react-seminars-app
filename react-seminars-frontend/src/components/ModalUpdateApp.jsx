@@ -1,7 +1,9 @@
 import { useSeminars } from '../SeminarsContext'
 import FormApp from './FormApp'
 
+//Компонент - Окно обновления семинара
 export default function ModalUpdateApp() {
+  //Используем глобальный стейт для обновления
   const { upSeminar, setUpdateModal, updateSeminar } = useSeminars()
 
   return (

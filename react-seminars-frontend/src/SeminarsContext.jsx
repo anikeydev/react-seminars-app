@@ -6,6 +6,7 @@ import {
   createSeminarB,
 } from './base'
 
+//Определяем голабльный контекст
 const SeminarsContext = createContext({
   seminars: [],
   loading: false,
@@ -13,19 +14,28 @@ const SeminarsContext = createContext({
   createModal: false,
 })
 
+//Определяем компонент провайдер
 export function SeminarsContextProvider({ children }) {
+  //Определяем глобальный стейт
+  //Стадия загрузки
   const [loading, setLoading] = useState(false)
+  //Текущий семинар для обновления
   const [upSeminar, setUpSeminar] = useState(null)
+  //Открыто обновление
   const [updateModal, setUpdateModal] = useState(false)
+  //Открыто создание
   const [createModal, setCreateModal] = useState(false)
+  //Все семинары
   const [seminars, setSeminars] = useState([])
 
+  //Удалить семинар по ID
   async function deleteSeminar(id) {
     const { message } = await deleteSeminarB(id)
     setSeminars(seminars.filter((s) => s.id != id))
     console.log(message)
   }
 
+  //Обновить семинар по ID
   async function updateSeminar(id, data) {
     const { message, updateSeminar } = await updateSeminarB(id, data)
     const result = seminars
@@ -38,12 +48,14 @@ export function SeminarsContextProvider({ children }) {
     console.log(message)
   }
 
+  //Создать новый семинар
   async function createSeminar(id = '', data) {
     const { message, newSeminar } = await createSeminarB(data)
     setSeminars([...seminars, newSeminar])
     console.log(message)
   }
 
+  //Загружаем базу с сервера
   useEffect(() => {
     async function preload() {
       setLoading(true)
@@ -55,6 +67,7 @@ export function SeminarsContextProvider({ children }) {
     preload()
   }, [])
 
+  //Возвращаем в провайдер
   return (
     <SeminarsContext.Provider
       value={{
@@ -77,6 +90,7 @@ export function SeminarsContextProvider({ children }) {
 
 export default SeminarsContext
 
+//Кастомный хук для простоты использования глобального контекста
 export function useSeminars() {
   return useContext(SeminarsContext)
 }
