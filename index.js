@@ -1,5 +1,6 @@
 import express from 'express'
 import cors from 'cors'
+import { v4 } from 'uuid'
 
 const PORT = 8000
 const app = express()
@@ -59,7 +60,10 @@ app.put('/api/v1/seminars/:id', (req, res) => {
 })
 
 app.post('/api/v1/seminars/', (req, res) => {
-  const newSeminar = req.body
+  const newSeminar = {
+    ...req.body,
+    id: v4(),
+  }
   seminars.push(newSeminar)
   res.status(200).json({ newSeminar: req.body })
 })

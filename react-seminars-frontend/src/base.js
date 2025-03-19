@@ -45,15 +45,14 @@ export async function deleteSeminarB(id) {
     })
 }
 
-export async function createSeminarB(id, data) {
+export async function createSeminarB(data) {
   return await axios
     .post('http://localhost:8000/api/v1/seminars/', {
-      id,
       ...data,
     })
     .then((response) => {
-      console.log(`Created new seminar: ${response.data}`)
-      return response.data
+      console.log(`Created new seminar`)
+      return response.data.newSeminar
     })
     .catch((e) => {
       console.log(`Filed created new seminar - ${e.message}`)
